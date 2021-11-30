@@ -9,7 +9,8 @@ const ReactionSchema = new Schema({
   reactionBody: {
     type: String,
     required: true,
-    maxlength: 280
+    minLength: 1,
+    maxLength: 280
   },
   username: {
     type: String,
@@ -61,6 +62,7 @@ const ThoughtSchema = new Schema(
   // get total count of comments and replies on retrieval
   ThoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
+    // return this.thoughts.reduce((total, thought) => total + thought.reactions.length + 1, 0);
   });
 
   // reference 18.1.5
